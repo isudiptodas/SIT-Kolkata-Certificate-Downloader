@@ -46,6 +46,8 @@ function page() {
         finally {
             toast.dismiss(loading);
             setUploading(false);
+            setCsvFile(null);
+            toast.success("File uploaded");
         }
     }
 
