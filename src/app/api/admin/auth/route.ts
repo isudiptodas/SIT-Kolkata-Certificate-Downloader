@@ -12,7 +12,7 @@ export async function POST(req: NextRequest) {
     const { type } = body;
 
     if (type === 'create') {
-        const { name, email, password, type } = body;
+        const { name, email, password } = body;
 
         try {
             const hashed = await bcrypt.hash(password, 10);
@@ -76,5 +76,6 @@ export async function POST(req: NextRequest) {
             }, { status: 400 });
         }
     }
+
 
 }
