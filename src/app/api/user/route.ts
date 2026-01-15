@@ -5,13 +5,6 @@ import { Participant } from "@/models/participant";
 export async function GET(req: NextRequest) {
   await connectDb();
 
-  const token = req.cookies.get('token')?.value;
-  if (!token) {
-    return NextResponse.json({
-      message: "Unauthorized"
-    }, { status: 400 });
-  }
-
   // const name = decodeURIComponent(req.url.split('name=')[1]);
   // console.log(name);
 
@@ -39,3 +32,4 @@ export async function GET(req: NextRequest) {
   }
 
 }
+
