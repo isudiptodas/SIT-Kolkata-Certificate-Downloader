@@ -32,7 +32,7 @@ function page() {
       return;
     }
 
-    if(data.name === name.trim()){
+    if(data && data?.name === name.trim()){
       return;
     }
 
@@ -126,4 +126,5 @@ function page() {
 }
 
 export default page
+
 
