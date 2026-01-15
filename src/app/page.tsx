@@ -36,6 +36,8 @@ function page() {
       return;
     }
 
+    const msg = toast.loading("Searching...");
+
     try {
       setLoading(true);
       const res = await axios.get(`/api/user?name=${encodeURIComponent(name.trim())}`);
@@ -54,6 +56,7 @@ function page() {
     }
     finally {
       setLoading(false);
+      toast.dismiss(msg);
     }
   }
 
@@ -126,5 +129,6 @@ function page() {
 }
 
 export default page
+
 
 
