@@ -32,6 +32,10 @@ function page() {
       return;
     }
 
+    if(data.name === name.trim()){
+      return;
+    }
+
     try {
       setLoading(true);
       const res = await axios.get(`/api/user?name=${encodeURIComponent(name.trim())}`);
@@ -79,7 +83,7 @@ function page() {
 
         pdf.addImage(dataUrl, 'PNG', 0, 0, imgWidth, imgHeight)
 
-        const name = data?.name || `SAP_Inside_Track`;
+        const name = `SAP_Inside_Track`;
 
         pdf.save(`${name}.pdf`);
         toast.success("Download started");
@@ -122,3 +126,4 @@ function page() {
 }
 
 export default page
+
