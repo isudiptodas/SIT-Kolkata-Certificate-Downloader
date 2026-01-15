@@ -60,12 +60,13 @@ function page() {
                             <input onChange={(e) => setPassword(e.target.value)} value={password} type={visible ? "text" : "password"} className={`w-[90%] py-3 px-3 bg-gray-200 rounded-lg mt-2 outline-none text-sm text-black`} placeholder='Enter password' />
                             <span onClick={() => setVisible(!visible)} className={`absolute opacity-50 top-5 right-10 cursor-pointer`}>{visible ? <FaEye /> : <FaEyeSlash />}</span>
                         </div>
-                        <p className={`w-[90%] mt-3 bg-white text-center rounded-lg shadow-lg border border-gray-300 py-2 cursor-pointer active:scale-95 duration-200 ease-in-out`} onClick={submit}>Login</p>
+                        <p className={`w-[90%] mt-3 bg-blue-500 text-white text-center rounded-lg shadow-lg border border-blue-700 py-2 cursor-pointer active:scale-95 active:opacity-80 duration-200 ease-in-out`} onClick={submit}>Login</p>
                     </div>
                 </div>
             </div>
         </>
     )
 }
+
 
 export default page
