@@ -35,9 +35,9 @@ export async function POST(req: NextRequest) {
                 .pipe(csv())
                 .on("data", (row) => {
                     results.push({
-                        name: row.name,
-                        email: row.email,
-                        organization: row.college,
+                        name: row.Name,
+                        email: row.Email,
+                        organization: row.Organization,
                     });
                 })
                 .on("end", resolve)

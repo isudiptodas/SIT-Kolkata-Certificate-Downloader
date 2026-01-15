@@ -12,10 +12,8 @@ export async function proxy(req: NextRequest) {
 
   try {
 
-    const secret = new TextEncoder().encode(process.env.SECRET_KEY);
+    const secret = new TextEncoder().encode(process.env.JWT_SECRET_KEY);
     const { payload } = await jwtVerify(token, secret);
-
-    //console.log(payload);
 
     const requestHeaders = new Headers(req.headers);
     requestHeaders.set('email', payload.email as string);
@@ -25,7 +23,7 @@ export async function proxy(req: NextRequest) {
         headers : requestHeaders
       }
     });
-
+ 
     return res;
 
   } catch (err) {

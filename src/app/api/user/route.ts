@@ -2,34 +2,37 @@ import { NextRequest, NextResponse } from "next/server";
 import { connectDb } from "@/config/connectDB";
 import { Participant } from "@/models/participant";
 
-export async function POST(req: NextRequest){
+export async function GET(req: NextRequest) {
   await connectDb();
 
   const token = req.cookies.get('token')?.value;
-  if(!token){
+  if (!token) {
     return NextResponse.json({
       message: "Unauthorized"
     }, { status: 400 });
   }
 
-  const body = await req.json();
-  const { name } = body;
+  // const name = decodeURIComponent(req.url.split('name=')[1]);
+  // console.log(name);
+
+  //console.log(req.nextUrl.searchParams.get('name'));
+  const name = req.nextUrl.searchParams.get('name');
 
   try {
     const found = await Participant.findOne({ name });
 
-  if(!found){
-    return NextResponse.json({
-      message: "User not found"
-    }, { status: 404 });
-  }
+    if (!found) {
+      return NextResponse.json({
+        message: "User not found"
+      }, { status: 404 });
+    }
 
-  return NextResponse.json({
+    return NextResponse.json({
       message: "User found",
       found
     }, { status: 200 });
   }
-  catch(err){
+  catch (err) {
     return NextResponse.json({
       message: "Something went wrong",
     }, { status: 500 });

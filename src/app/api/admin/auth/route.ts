@@ -3,6 +3,7 @@ import { User } from "@/models/user";
 import bcrypt from "bcryptjs";
 import { NextRequest, NextResponse } from "next/server";
 import jwt from 'jsonwebtoken';
+import { jwtVerify } from 'jose';
 
 export async function POST(req: NextRequest) {
     await connectDb();
@@ -33,7 +34,7 @@ export async function POST(req: NextRequest) {
         }
     }
 
-    if (type === 'login') {
+    else if (type === 'login') {
         try {
 
             const { email, password } = body;
@@ -45,7 +46,7 @@ export async function POST(req: NextRequest) {
                 }, { status: 404 });
             }
 
-            const matched = await bcrypt.compare(found.password, password);
+            const matched = await bcrypt.compare(password, found.password);
 
             if (!matched) {
                 return NextResponse.json({
@@ -53,7 +54,7 @@ export async function POST(req: NextRequest) {
                 }, { status: 403 });
             }
 
-            const token = jwt.sign({ email: found.email }, process.env.SECRET_KEY as string, { expiresIn: '86400' })
+            const token = jwt.sign({ email: found.email }, process.env.JWT_SECRET_KEY as string, { expiresIn: '1d' })
 
             const res = NextResponse.json({
                 status: 201,
@@ -69,13 +70,32 @@ export async function POST(req: NextRequest) {
 
             return res;
 
-
         } catch (error) {
+            console.error(error);
             return NextResponse.json({
-                message: 'Something went wrong'
-            }, { status: 400 });
+                status: 500,
+                message: "Something went wrong"
+            });
         }
     }
 
+}
 
+export async function GET(req: NextRequest) {
+    try {
+        const token = req.cookies.get('token')?.value;
+        console.log(token);
+        const secret = new TextEncoder().encode(process.env.JWT_SECRET_KEY);
+        const { payload } = await jwtVerify(token as string, secret);
+
+        console.log(payload);
+
+        return NextResponse.json({
+            message: 'User verified'
+        }, { status: 200 });
+    } catch (err) {
+        return NextResponse.json({
+            message: 'Something went wrong'
+        }, { status: 500 });
+    }
 }
