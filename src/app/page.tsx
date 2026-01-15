@@ -1,9 +1,11 @@
 'use client'
 
 import axios from "axios"
-import { useState } from "react"
+import { useState, useRef, useCallback } from "react"
 import { toast } from "sonner";
 import { GoDownload } from "react-icons/go";
+import { toPng } from 'html-to-image'
+import jsPDF from 'jspdf'
 
 interface userData {
   name: string,
@@ -16,6 +18,8 @@ function page() {
   const [name, setName] = useState('');
   const [data, setData] = useState<userData | null>(null);
   const [loading, setLoading] = useState(false);
+  const divRef = useRef<HTMLDivElement>(null)
+
 
   const getData = async () => {
 
@@ -32,7 +36,7 @@ function page() {
       setLoading(true);
       const res = await axios.get(`/api/user?name=${encodeURIComponent(name)}`);
 
-      if(res.status === 200){
+      if (res.status === 200) {
         setData(res.data.found);
       }
     } catch (err: any) {
@@ -44,10 +48,44 @@ function page() {
         toast.error('Something went wrong');
       }
     }
-    finally{
+    finally {
       setLoading(false);
     }
   }
+
+  const download = useCallback(async () => {
+    if (!divRef.current) {
+      return;
+    }
+
+    try {
+
+      const dataUrl = await toPng(divRef.current, { cacheBust: true })
+
+      const img = new Image()
+      img.src = dataUrl
+
+      img.onload = () => {
+        const imgWidth = img.width
+        const imgHeight = img.height
+
+        const orientation = imgWidth > imgHeight ? 'landscape' : 'portrait'
+
+        const pdf = new jsPDF({
+          orientation,
+          unit: 'px',
+          format: [imgWidth, imgHeight],
+        })
+
+        pdf.addImage(dataUrl, 'PNG', 0, 0, imgWidth, imgHeight)
+
+        pdf.save(`${data?.name}.pdf`);
+        toast.success("Download started");
+      }
+    } catch (err) {
+      console.error(err)
+    }
+  }, [])
 
   return (
     <>
@@ -66,13 +104,14 @@ function page() {
           <p onClick={getData} className={`w-[90%] md:w-[70%] lg:w-[40%] mt-2 text-center bg-linear-to-r from-blue-500 to-blue-600 text-white active:scale-95 duration-200 ease-in-out cursor-pointer hover:opacity-80 py-2 rounded-lg`}>Search</p>
         </div>
 
-        <div className={`w-[90%] md:w-[70%] pt-10 h-auto flex flex-col justify-center items-center overflow-hidden`}>
-          <div className={`h-56 w-auto md:h-64 lg:h-52 relative bg-red-600`}>
-            <p className={`absolute left-106`}>Sudipto Das</p>
-            <img src="/assets/certificate-template.jpeg" className="h-full"/>
+        <div className={`${data === null ? "hidden" : "block"} w-[90%] md:w-[70%] pt-10 h-auto flex flex-col justify-center items-center overflow-hidden`}>
+          <div ref={divRef} className={`h-56 w-auto md:h-64 lg:h-52 relative bg-red-600`}>
+            <p className={`absolute text-[#174777] text-sm left-9 md:left-10 lg:left-9 top-[38%] font-Display`}>{data?.name}</p>
+            <p className={`absolute text-[#0a3965] text-[8px] italic left-9 md:left-10 lg:left-8 top-[56%] xl:top-[55%] font-Organization`}>{data?.organization}</p>
+            <img src="/assets/certificate-template.jpeg" className="h-full" />
           </div>
 
-          <p className={`w-auto px-3 mt-10 lg:mt-5 py-2 rounded-lg bg-white text-black text-sm cursor-pointer active:opacity-75 duration-200 flex justify-center items-center gap-2`}>Download <span><GoDownload /></span></p>
+          <p onClick={download} className={`w-auto px-3 mt-10 lg:mt-5 py-2 rounded-lg bg-white text-black text-sm cursor-pointer active:opacity-75 duration-200 flex justify-center items-center gap-2`}>Download <span><GoDownload /></span></p>
 
         </div>
       </div>

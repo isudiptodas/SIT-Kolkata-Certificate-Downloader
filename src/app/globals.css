@@ -1,6 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 @import "tailwindcss";
+
+@font-face {
+  font-family: 'Benguiat';
+  src: url("/fonts/ITC Benguiat Condensed Medium.otf") format("opentype");
+}
+
+@font-face {
+  font-family: 'Display';
+  src: url("/fonts/DMSerifDisplay-Regular.ttf") format("truetype");
+}
 
 @theme {
   --font-Montserrat: "Montserrat", sans-serif; 
+  --font-Display: "Display", sans-serif; 
+  --font-Organization: "Benguiat", sans-serif; 
 }
