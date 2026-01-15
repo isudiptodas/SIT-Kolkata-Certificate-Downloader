@@ -32,10 +32,9 @@ function page() {
       return;
     }
 
-    const msg = toast.loading("Searching...");
     try {
       setLoading(true);
-      const res = await axios.get(`/api/user?name=${encodeURIComponent(name)}`);
+      const res = await axios.get(`/api/user?name=${encodeURIComponent(name.trim())}`);
 
       if (res.status === 200) {
         setData(res.data.found);
@@ -51,7 +50,6 @@ function page() {
     }
     finally {
       setLoading(false);
-      toast.dismiss(msg);
     }
   }
 
@@ -65,7 +63,7 @@ function page() {
       const dataUrl = await toPng(divRef.current, { cacheBust: true })
 
       const img = new Image()
-      img.src = dataUrl
+      img.src = dataUrl;
 
       img.onload = () => {
         const imgWidth = img.width
@@ -81,7 +79,9 @@ function page() {
 
         pdf.addImage(dataUrl, 'PNG', 0, 0, imgWidth, imgHeight)
 
-        pdf.save(`${data?.name}.pdf`);
+        const name = data?.name || `SAP_Inside_Track`;
+
+        pdf.save(`${name}.pdf`);
         toast.success("Download started");
       }
     } catch (err) {
@@ -120,6 +120,5 @@ function page() {
     </>
   )
 }
-
 
 export default page
