@@ -109,7 +109,7 @@ function page() {
         </div>
 
         <div className={`w-full flex flex-col justify-start items-center pt-5`}>
-          <input onChange={(e) => setName(e.target.value)} type="text" className={`w-[90%] md:w-[70%] lg:w-[40%] py-2 px-3 bg-gray-200 text-black rounded-lg outline-none font-Montserrat text-sm`} placeholder="Enter your name" />
+          <input onChange={(e) => setName(e.target.value)} type="text" className={`w-[90%] md:w-[70%] lg:w-[40%] py-3 px-3 bg-gray-200 text-black rounded-lg outline-none font-Montserrat text-sm`} placeholder="Enter your name" />
           <p onClick={getData} className={`w-[90%] md:w-[70%] lg:w-[40%] mt-2 text-center bg-linear-to-r from-blue-500 to-blue-600 text-white active:scale-95 duration-200 ease-in-out cursor-pointer hover:opacity-80 py-2 rounded-lg`}>Search</p>
         </div>
 
@@ -129,6 +129,7 @@ function page() {
 }
 
 export default page
+
 
 
 
