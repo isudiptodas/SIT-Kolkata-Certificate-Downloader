@@ -16,7 +16,7 @@ export async function GET(req: NextRequest) {
 
     if (!found) {
       return NextResponse.json({
-        message: "User not found"
+        message: `No record found for ${name}`
       }, { status: 404 });
     }
 
@@ -32,4 +32,5 @@ export async function GET(req: NextRequest) {
   }
 
 }
+
 
