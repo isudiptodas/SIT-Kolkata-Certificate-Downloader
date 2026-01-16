@@ -100,7 +100,7 @@ function page() {
     <>
       <div className={`w-full bg-linear-to-br from-blue-700 via-black to-black min-h-screen flex flex-col justify-start items-center relative`}>
        
-        <div className="absolute top-0 z-[-2] min-h-screen min-w-screen bg-[#000000] bg-[radial-gradient(#ffffff33_1px,#00091d_1px)] bg-[size:20px_20px]"></div>
+        <div className="absolute top-0 z-10 h-full w-full bg-[#000000] bg-[radial-gradient(#ffffff33_1px,#00091d_1px)] bg-[size:20px_20px]"></div>
         
         <div className={`w-full flex justify-center items-center py-4 border-b border-gray-300`}>
           <img src="/assets/sit-logo-blue.png" className={`h-10`} />
@@ -132,6 +132,7 @@ function page() {
 }
 
 export default page
+
 
 
 
