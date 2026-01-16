@@ -72,12 +72,15 @@ function page() {
     return (
         <>
             <div className={`w-full min-h-screen flex flex-col justify-start items-center relative bg-linear-to-br from-blue-700 via-black to-black`}>
-                <div className={`w-full flex justify-center items-center py-4 border-b border-gray-300`}>
+                
+                <div className="absolute top-0 z-10 h-full w-full bg-transparent bg-[radial-gradient(#ffffff33_1px,#00091d_1px)] bg-[size:20px_20px]"></div>
+                
+                <div className={`w-full z-20 flex justify-center items-center py-4 border-b border-gray-300`}>
                     <img src="/assets/sit-logo-blue.png" className={`h-10`} />
                     <p className={`text-[12px] font-semibold leading-3 text-white`}>SAP Inside Track <br /> Kolkata</p>
                 </div>
 
-                <div className={`w-full px-5 h-auto flex flex-col justify-start items-center pt-5 md:pt-10`}>
+                <div className={`w-full z-20 px-5 h-auto flex flex-col justify-start items-center pt-5 md:pt-10`}>
                     <h2 className={`w-full text-center font-Montserrat text-2xl font-semibold text-white`}>Admin Panel</h2>
 
                     <div className={`w-[90%] ${csvFile === null ? "block" : "hidden"} md:w-[60%] lg:w-[40%] cursor-pointer relative flex flex-col justify-center items-center py-5 px-3 overflow-hidden mt-5 rounded-lg border-2 border-gray-400 border-dotted`}>
@@ -105,5 +108,6 @@ function page() {
         </>
     )
 }
+
 
 export default page
