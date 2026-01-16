@@ -100,23 +100,23 @@ function page() {
     <>
       <div className={`w-full bg-linear-to-br from-blue-700 via-black to-black min-h-screen flex flex-col justify-start items-center relative`}>
        
-        <div className="absolute top-0 z-10 h-full w-full bg-[#000000] bg-[radial-gradient(#ffffff33_1px,#00091d_1px)] bg-[size:20px_20px]"></div>
+        <div className="absolute top-0 z-10 h-full w-full bg-transparent bg-[radial-gradient(#ffffff33_1px,#00091d_1px)] bg-[size:20px_20px]"></div>
         
-        <div className={`w-full flex justify-center items-center py-4 border-b border-gray-300`}>
+        <div className={`w-full z-20 flex justify-center items-center py-4 border-b border-gray-300`}>
           <img src="/assets/sit-logo-blue.png" className={`h-10`} />
           <p className={`text-[12px] font-semibold leading-3 text-white`}>SAP Inside Track <br /> Kolkata</p>
         </div>
 
-        <div className={`w-full px-5 h-auto flex flex-col justify-start items-center pt-5 lg:pt-10`}>
+        <div className={`w-full z-20 px-5 h-auto flex flex-col justify-start items-center pt-5 lg:pt-10`}>
           <h2 className={`w-full text-center font-Montserrat text-lg xl:text-3xl text-white`}>SAP Inside Track Kolkata Participation Certificate Downloader</h2>
         </div>
 
-        <div className={`w-full flex flex-col justify-start items-center pt-5`}>
+        <div className={`w-full z-20 flex flex-col justify-start items-center pt-5`}>
           <input onChange={(e) => setName(e.target.value)} type="text" className={`w-[90%] md:w-[70%] lg:w-[40%] py-3 px-3 bg-gray-200 text-black rounded-lg outline-none font-Montserrat text-sm`} placeholder="Enter your name" />
           <p onClick={getData} className={`w-[90%] md:w-[70%] lg:w-[40%] mt-2 text-center bg-linear-to-r from-blue-500 to-blue-600 text-white active:scale-95 duration-200 ease-in-out cursor-pointer hover:opacity-80 py-2 rounded-lg`}>Search</p>
         </div>
 
-        <div className={`${data === null ? "hidden" : "block"} w-[90%] md:w-[70%] pt-10 h-auto flex flex-col justify-center items-center overflow-hidden`}>
+        <div className={`${data === null ? "hidden" : "block"} z-20 w-[90%] md:w-[70%] pt-10 h-auto flex flex-col justify-center items-center overflow-hidden`}>
           <div ref={divRef} className={`h-56 w-auto md:h-64 lg:h-52 relative bg-red-600`}>
             <p className={`absolute text-[#174777] text-sm left-9 md:left-10 lg:left-9 top-[38%] font-Display`}>{data?.name}</p>
             <p className={`absolute text-[#0a3965] text-[8px] italic left-9 md:left-10 lg:left-8 top-[56%] xl:top-[55%] font-Organization`}>{data?.organization}</p>
@@ -132,6 +132,7 @@ function page() {
 }
 
 export default page
+
 
 
 
