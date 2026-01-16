@@ -46,12 +46,15 @@ function page() {
     return (
         <>
             <div className={`w-full bg-linear-to-br from-blue-700 via-black to-black min-h-screen relative flex flex-col justify-start items-center`}>
-                <div className={`w-full flex justify-center items-center py-4 border-b border-gray-300`}>
+               
+                <div className="absolute top-0 z-10 h-full w-full bg-transparent bg-[radial-gradient(#ffffff33_1px,#00091d_1px)] bg-[size:20px_20px]"></div>
+                
+                <div className={`w-full z-20 flex justify-center items-center py-4 border-b border-gray-300`}>
                     <img src="/assets/sit-logo-blue.png" className={`h-10`} />
                     <p className={`text-[12px] font-semibold leading-3 text-white`}>SAP Inside Track <br /> Kolkata</p>
                 </div>
 
-                <div className={`w-full flex justify-center items-center`}>
+                <div className={`w-full z-20 flex justify-center items-center`}>
                     <div className={`w-full lg:w-[40%] flex flex-col justify-start items-center pt-10`}>
                         <h3 className={`w-full text-xl font-semibold font-Montserrat text-center text-white`}>Admin Login</h3>
 
@@ -70,3 +73,4 @@ function page() {
 
 
 export default page
+
