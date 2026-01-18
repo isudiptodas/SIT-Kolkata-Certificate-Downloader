@@ -9,7 +9,7 @@ export async function GET(req: NextRequest) {
   // console.log(name);
 
   //console.log(req.nextUrl.searchParams.get('name'));
-  const name = req.nextUrl.searchParams.get('name');
+  const name = req.nextUrl.searchParams.get('name') as string;
 
   try {
     const allParticipants = await Participant.find();
@@ -36,6 +36,7 @@ export async function GET(req: NextRequest) {
   }
 
 }
+
 
 
 
