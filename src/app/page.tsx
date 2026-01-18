@@ -90,7 +90,9 @@ function page() {
 
         pdf.save(`${name}.pdf`);
         toast.success("Download started"); */
-
+     
+      const element = divRef.current;
+      
       const width = 1755;
        const height = 1241;
 
@@ -153,6 +155,7 @@ function page() {
 }
 
 export default page
+
 
 
 
