@@ -67,7 +67,7 @@ function page() {
 
     try {
 
-      const dataUrl = await toPng(divRef.current, { cacheBust: true })
+      /* const dataUrl = await toPng(divRef.current, { cacheBust: true })
 
       const img = new Image()
       img.src = dataUrl;
@@ -85,7 +85,32 @@ function page() {
         })
 
         pdf.addImage(dataUrl, 'PNG', 0, 0, imgWidth, imgHeight)
+        */
 
+       const element = divRef.current;
+
+       const rect = element.getBoundingClientRect();
+       const width = rect.width;
+       const height = rect.height;
+
+       const orientation = width > height ? "landscape" : "portrait";
+
+       const pdf = new jsPDF({
+         orientation,
+         unit: "px",
+         format: [width, height],
+       });
+
+    await pdf.html(element, {
+      x: 0,
+      y: 0,
+      width,
+      windowWidth: width,
+      html2canvas: {
+        scale: 2, 
+        useCORS: true,
+      },
+    });
         const name = `SAP_Inside_Track`;
 
         pdf.save(`${name}.pdf`);
@@ -132,6 +157,7 @@ function page() {
 }
 
 export default page
+
 
 
 
