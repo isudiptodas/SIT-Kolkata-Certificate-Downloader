@@ -12,7 +12,7 @@ export async function GET(req: NextRequest) {
   const name = req.nextUrl.searchParams.get('name') as string;
 
   try {
-    const allParticipants = await Participant.find();
+    const allParticipants = await Participant.find({});
 
     const found = allParticipants.find(p =>
        p.name.toLowerCase() === name.toLowerCase()
@@ -36,6 +36,7 @@ export async function GET(req: NextRequest) {
   }
 
 }
+
 
 
 
