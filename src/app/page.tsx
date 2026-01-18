@@ -101,20 +101,25 @@ function page() {
          format: [width, height],
        });
 
-       await pdf.html(element, {
+       pdf.html(element, {
          x: 0,
          y: 0,
          width,
          windowWidth: width,
          html2canvas: {
-         scale: 2, 
+         scale: 2,
          useCORS: true,
-        },
-       });
-        const name = `SAP_Inside_Track`;
+       },
+       callback: function (pdf) {
+        pdf.save("SAP_Inside_Track.pdf");
+        toast.success("Download started");
+       },
+    });
+       
+      /* const name = `SAP_Inside_Track`;
 
         pdf.save(`${name}.pdf`);
-        toast.success("Download started");
+        toast.success("Download started"); */
       }
       catch (err) {
       console.error(err)
@@ -157,6 +162,7 @@ function page() {
 }
 
 export default page
+
 
 
 
