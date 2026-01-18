@@ -85,34 +85,34 @@ function page() {
         })
 
         pdf.addImage(dataUrl, 'PNG', 0, 0, imgWidth, imgHeight)
-        */
-
-       const width = 1755;
-       const height = 1241;
-
-       const pdf = new jsPDF({
-        orientation: "landscape",
-        unit: "px",
-        format: [width, height],
-       });
-
-       pdf.html(divRef.current, {
-        callback: function (pdf) {
-        pdf.save("SAP_Inside_Track.pdf");
-        toast.success("Download started");
-     },
-    html2canvas: {
-      scale: 2,
-      useCORS: true,
-    },
-  });
-       
-      /* const name = `SAP_Inside_Track`;
+        
+        const name = `SAP_Inside_Track`;
 
         pdf.save(`${name}.pdf`);
         toast.success("Download started"); */
+
+      const width = 1755;
+       const height = 1241;
+
+       const pdf = new jsPDF({
+      orientation: width > height ? "landscape" : "portrait",
+      unit: "px",
+      format: [width, height],
+    });
+
+    await pdf.html(element, {
+      html2canvas: {
+        scale: 1,
+        useCORS: true,
+      },
+    });
+
+    pdf.save("SAP_Inside_Track.pdf");
+    toast.success("Download started");
+      
       }
       catch (err) {
+      toast.error("Error downloading pdf");
       console.error(err)
     }
   }, [])
@@ -153,6 +153,7 @@ function page() {
 }
 
 export default page
+
 
 
 
