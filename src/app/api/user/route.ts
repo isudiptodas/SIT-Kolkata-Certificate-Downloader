@@ -14,10 +14,8 @@ export async function GET(req: NextRequest) {
   try {
     const allParticipants = await Participant.find({});
 
-    const found = allParticipants.find(p =>
-       p.name.toLowerCase() === name.toLowerCase()
-    );
-    
+    const found = await Participant.findOne({ name }).collation({ locale: "en", strength: 2 });
+
     if (!found) {
       return NextResponse.json({
         message: `No record found for ${name}`
@@ -36,6 +34,7 @@ export async function GET(req: NextRequest) {
   }
 
 }
+
 
 
 
