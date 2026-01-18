@@ -145,7 +145,7 @@ function page() {
           <div ref={divRef} className={`h-56 w-auto md:h-64 lg:h-52 relative bg-red-600`}>
             <p className={`absolute text-[#174777] text-sm left-9 md:left-10 lg:left-9 top-[38%] font-Display`}>{data?.name}</p>
             <p className={`absolute text-[#0a3965] text-[8px] italic left-9 md:left-10 lg:left-8 top-[56%] xl:top-[55%] font-Organization`}>{data?.organization}</p>
-            <img src="/assets/certificate-template.jpeg" className="h-full" />
+            <img crossOrigin="anonymous" src="/assets/certificate-template.jpeg" className="h-full" />
           </div>
 
           <p onClick={download} className={`w-auto px-3 mt-10 lg:mt-5 py-2 rounded-lg bg-white text-black text-sm cursor-pointer active:opacity-75 duration-200 flex justify-center items-center gap-2`}>Download <span><GoDownload /></span></p>
@@ -157,6 +157,7 @@ function page() {
 }
 
 export default page
+
 
 
 
