@@ -87,34 +87,25 @@ function page() {
         pdf.addImage(dataUrl, 'PNG', 0, 0, imgWidth, imgHeight)
         */
 
-       const element = divRef.current;
-
-       const rect = element.getBoundingClientRect();
-       const width = rect.width;
-       const height = rect.height;
-
-       const orientation = width > height ? "landscape" : "portrait";
+       const width = 1755;
+       const height = 1241;
 
        const pdf = new jsPDF({
-         orientation,
-         unit: "px",
-         format: [width, height],
+        orientation: "landscape",
+        unit: "px",
+        format: [width, height],
        });
 
-       pdf.html(element, {
-         x: 0,
-         y: 0,
-         width,
-         windowWidth: width,
-         html2canvas: {
-         scale: 2,
-         useCORS: true,
-       },
-       callback: function (pdf) {
+       pdf.html(divRef.current, {
+        callback: function (pdf) {
         pdf.save("SAP_Inside_Track.pdf");
         toast.success("Download started");
-       },
-    });
+     },
+    html2canvas: {
+      scale: 2,
+      useCORS: true,
+    },
+  });
        
       /* const name = `SAP_Inside_Track`;
 
@@ -162,6 +153,7 @@ function page() {
 }
 
 export default page
+
 
 
 
