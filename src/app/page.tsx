@@ -67,7 +67,7 @@ function page() {
 
     try {
 
-      /* const dataUrl = await toPng(divRef.current, { cacheBust: true })
+      const dataUrl = await toPng(divRef.current, { cacheBust: true })
 
       const img = new Image()
       img.src = dataUrl;
@@ -86,32 +86,10 @@ function page() {
 
         pdf.addImage(dataUrl, 'PNG', 0, 0, imgWidth, imgHeight)
         
-        const name = `SAP_Inside_Track`;
+        const downloadName = name || `SAP_Inside_Track`;
 
-        pdf.save(`${name}.pdf`);
-        toast.success("Download started"); */
-     
-      const element = divRef.current;
-      
-      const width = 1755;
-       const height = 1241;
-
-       const pdf = new jsPDF({
-      orientation: width > height ? "landscape" : "portrait",
-      unit: "px",
-      format: [width, height],
-    });
-
-    await pdf.html(element, {
-      html2canvas: {
-        scale: 1,
-        useCORS: true,
-      },
-    });
-
-    pdf.save("SAP_Inside_Track.pdf");
-    toast.success("Download started");
-      
+        pdf.save(`${downloadName}.pdf`);
+        toast.success("Download started"); 
       }
       catch (err) {
       toast.error("Error downloading pdf");
@@ -155,6 +133,7 @@ function page() {
 }
 
 export default page
+
 
 
 
